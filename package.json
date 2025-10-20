@@ -36,6 +36,7 @@
     "scripts": {
         "build": "turbo run build",
         "dev": "turbo run dev",
+        "dev:local": "bash ./scripts/dev-local.sh",
         "lint": "turbo run lint",
         "lint:fix": "turbo run lint -- --fix",
         "format": "prettier --write \"**/*.{ts,tsx,js,vue,md,mdx}\"",
