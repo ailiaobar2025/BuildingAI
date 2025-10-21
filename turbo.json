@@ -38,7 +38,13 @@
         "LOG_DATABASE_SCHEMA",
         "SERVER_IS_DEMO_ENV",
         "CACHE_TTL",
-        "CACHE_MAX_ITEMS"
+        "CACHE_MAX_ITEMS",
+        "VOLCENGINE_IMAGE_ENDPOINT",
+        "VOLCENGINE_IMAGE_REGION",
+        "VOLCENGINE_IMAGE_SERVICE",
+        "VOLCENGINE_IMAGE_ACCESS_KEY_ID",
+        "VOLCENGINE_IMAGE_SECRET_ACCESS_KEY",
+        "VOLCENGINE_IMAGE_DEFAULT_REQ_KEY"
     ],
     "tasks": {
         "build": {

@@ -41,16 +41,15 @@ const props = withDefaults(
         /**
          * 输出格式：'html' | 'markdown'
          */
-        outputFormat?: 'html' | 'markdown';
+        outputFormat?: "html" | "markdown";
     }>(),
     {
         customClass: "",
         placeholder: "console-common.proEditor.placeholder",
         enableMarkdown: true,
-        outputFormat: 'html',
+        outputFormat: "html",
     },
 );
-
 
 const content = computed<string>({
     get: () => props.modelValue,
@@ -73,15 +72,17 @@ onMounted(() => {
 
     // 如果启用 Markdown 模式，添加 Markdown 扩展
     if (props.enableMarkdown) {
-        extensions.push(Markdown.configure({
-            html: true, // 允许 HTML 标签
-            tightLists: true, // 紧密列表
-            bulletListMarker: '-', // 无序列表标记
-            linkify: false, // 自动链接检测
-            breaks: false, // 换行符转换为 <br>
-            transformPastedText: false, // 粘贴文本时转换为 Markdown
-            transformCopiedText: false, // 复制文本时转换为 Markdown
-        }));
+        extensions.push(
+            Markdown.configure({
+                html: true, // 允许 HTML 标签
+                tightLists: true, // 紧密列表
+                bulletListMarker: "-", // 无序列表标记
+                linkify: false, // 自动链接检测
+                breaks: false, // 换行符转换为 <br>
+                transformPastedText: false, // 粘贴文本时转换为 Markdown
+                transformCopiedText: false, // 复制文本时转换为 Markdown
+            }),
+        );
     }
 
     editor.value = new Editor({
@@ -94,7 +95,7 @@ onMounted(() => {
             attributes: { class: "focus:outline-none" },
         },
         onUpdate: ({ editor }: { editor: any }) => {
-            if (props.outputFormat === 'markdown' && props.enableMarkdown) {
+            if (props.outputFormat === "markdown" && props.enableMarkdown) {
                 // 尝试获取 Markdown 格式
                 try {
                     const markdown = editor.storage.markdown?.getMarkdown();
@@ -219,8 +220,8 @@ function redo() {
  * 获取 Markdown 格式的内容
  */
 function getMarkdownContent(): string {
-    if (!editor.value) return '';
-    
+    if (!editor.value) return "";
+
     // 如果安装了 Markdown 扩展，可以获取 Markdown 格式
     try {
         return editor.value.storage.markdown?.getMarkdown() || editor.value.getHTML();
@@ -234,9 +235,9 @@ function getMarkdownContent(): string {
  * 获取当前内容（根据 outputFormat 决定格式）
  */
 function getCurrentContent(): string {
-    if (!editor.value) return '';
-    
-    if (props.outputFormat === 'markdown' && props.enableMarkdown) {
+    if (!editor.value) return "";
+
+    if (props.outputFormat === "markdown" && props.enableMarkdown) {
         return getMarkdownContent();
     } else {
         return editor.value.getHTML();
@@ -248,7 +249,7 @@ function getCurrentContent(): string {
  */
 function setMarkdownContent(markdown: string) {
     if (!editor.value) return;
-    
+
     try {
         editor.value.commands.setContent(markdown);
     } catch {
@@ -260,52 +261,52 @@ function setMarkdownContent(markdown: string) {
 /**
  * 插入 Markdown 语法快捷方式
  */
-function insertMarkdownSyntax(type: 'bold' | 'italic' | 'code' | 'link' | 'image' | 'heading') {
+function insertMarkdownSyntax(type: "bold" | "italic" | "code" | "link" | "image" | "heading") {
     if (!editor.value) return;
-    
+
     const selection = editor.value.state.selection;
     const selectedText = editor.value.state.doc.textBetween(selection.from, selection.to);
-    
-    let before = '';
-    let after = '';
-    let placeholder = '';
-    
+
+    let before = "";
+    let after = "";
+    let placeholder = "";
+
     switch (type) {
-        case 'bold':
-            before = '**';
-            after = '**';
-            placeholder = '粗体文本';
+        case "bold":
+            before = "**";
+            after = "**";
+            placeholder = "粗体文本";
             break;
-        case 'italic':
-            before = '*';
-            after = '*';
-            placeholder = '斜体文本';
+        case "italic":
+            before = "*";
+            after = "*";
+            placeholder = "斜体文本";
             break;
-        case 'code':
-            before = '`';
-            after = '`';
-            placeholder = '代码';
+        case "code":
+            before = "`";
+            after = "`";
+            placeholder = "代码";
             break;
-        case 'link':
-            before = '[';
-            after = '](url)';
-            placeholder = '链接文本';
+        case "link":
+            before = "[";
+            after = "](url)";
+            placeholder = "链接文本";
             break;
-        case 'image':
-            before = '![';
-            after = '](url)';
-            placeholder = '图片描述';
+        case "image":
+            before = "![";
+            after = "](url)";
+            placeholder = "图片描述";
             break;
-        case 'heading':
-            before = '# ';
-            after = '';
-            placeholder = '标题';
+        case "heading":
+            before = "# ";
+            after = "";
+            placeholder = "标题";
             break;
     }
-    
+
     const textToInsert = selectedText || placeholder;
     const fullText = before + textToInsert + after;
-    
+
     editor.value.commands.insertContent(fullText);
 }
 
@@ -440,16 +441,16 @@ defineExpose({
                 :variant="editor?.isActive('bulletList') ? 'soft' : 'ghost'"
                 :disabled="!editor?.can().chain().focus().toggleBulletList().run()"
                 @click="toggleBulletList"
-                ><UIcon name="i-lucide-list" size="16" /></UButton
-            >
+                ><UIcon name="i-lucide-list" size="16"
+            /></UButton>
             <UButton
                 color="neutral"
                 size="xs"
                 :variant="editor?.isActive('orderedList') ? 'soft' : 'ghost'"
                 :disabled="!editor?.can().chain().focus().toggleOrderedList().run()"
                 @click="toggleOrderedList"
-                ><UIcon name="i-lucide-list-ordered" size="16" /></UButton
-            >
+                ><UIcon name="i-lucide-list-ordered" size="16"
+            /></UButton>
             <UButton
                 color="neutral"
                 size="xs"
@@ -464,20 +465,20 @@ defineExpose({
                 :variant="editor?.isActive('codeBlock') ? 'soft' : 'ghost'"
                 :disabled="!editor?.can().chain().focus().toggleCodeBlock().run()"
                 @click="toggleCodeBlock"
-                ><UIcon name="i-lucide-code-xml" size="16" /></UButton
-            >
+                ><UIcon name="i-lucide-code-xml" size="16"
+            /></UButton>
             <span class="mx-1 h-4 w-px bg-gray-200 dark:bg-gray-700"></span>
 
             <!-- 图片与清理 -->
-            <UButton size="xs" color="neutral" variant="soft" @click="handlePickAndInsertImage"
-                >{{ t("console-common.proEditor.img") }}</UButton
-            >
-            <UButton size="xs" color="neutral" variant="ghost" @click="clearMarks"
-                >{{ t("console-common.proEditor.clearMarks") }}</UButton
-            >
-            <UButton size="xs" color="neutral" variant="ghost" @click="clearNodes"
-                >{{ t("console-common.proEditor.clearNodes") }}</UButton
-            >
+            <UButton size="xs" color="neutral" variant="soft" @click="handlePickAndInsertImage">{{
+                t("console-common.proEditor.img")
+            }}</UButton>
+            <UButton size="xs" color="neutral" variant="ghost" @click="clearMarks">{{
+                t("console-common.proEditor.clearMarks")
+            }}</UButton>
+            <UButton size="xs" color="neutral" variant="ghost" @click="clearNodes">{{
+                t("console-common.proEditor.clearNodes")
+            }}</UButton>
             <span class="mx-1 h-4 w-px bg-gray-200 dark:bg-gray-700"></span>
 
             <!-- 撤销/重做 与 分隔 -->

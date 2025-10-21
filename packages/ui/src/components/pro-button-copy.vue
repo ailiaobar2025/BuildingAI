@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useClipboard } from "@vueuse/core";
+
 import { useMessage } from "../composables/useMessage";
 
 // 定义组件接收的所有属性，通过v-bind="$attrs"传递给UButton
@@ -30,7 +31,7 @@ const { copy, copied } = useClipboard();
 
 async function handleCopy() {
     await copy(props.content);
-    useMessage().success(props.copiedText || props.defaultText || t('common.chat.messages.copied'));
+    useMessage().success(props.copiedText || props.defaultText || t("common.chat.messages.copied"));
 }
 </script>
 

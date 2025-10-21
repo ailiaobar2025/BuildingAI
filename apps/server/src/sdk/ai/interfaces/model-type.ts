@@ -42,6 +42,12 @@ export const MODEL_TYPES = {
      * 将文本内容转换为自然语音
      */
     TTS: "tts",
+
+    /**
+     * 图像生成模型
+     * 用于根据文本或参考图生成图像内容
+     */
+    IMAGE: "image",
 } as const;
 
 /**
@@ -62,6 +68,7 @@ export const MODEL_TYPE_DESCRIPTIONS: Record<ModelType, string> = {
     [MODEL_TYPES.TEXT_EMBEDDING]:
         "文本嵌入模型 - 将文本转换为向量表示，用于语义搜索、文本聚类等任务",
     [MODEL_TYPES.TTS]: "文本转语音模型 - 将文本内容转换为自然、流畅的语音输出",
+    [MODEL_TYPES.IMAGE]: "图像生成模型 - 根据文本描述或参考图像生成新的图像内容",
 };
 
 /**

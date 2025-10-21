@@ -15,7 +15,9 @@ import { AiChatRecordController } from "./controllers/ai-chat-record.controller"
 import { WebAiMcpServerController } from "./controllers/ai-mcp-server.controller";
 import { AiModelController } from "./controllers/ai-model.controller";
 import { AiProviderController } from "./controllers/ai-provider.controller";
+import { ImageGenerationController } from "./controllers/image-generation.controller";
 import { WebAiMcpServerService } from "./services/ai-mcp-server.service";
+import { ImageGenerationService } from "./services/image-generation.service";
 import { UserMcpServerService } from "./services/user-mcp-server.service";
 
 /**
@@ -38,7 +40,8 @@ import { UserMcpServerService } from "./services/user-mcp-server.service";
         AiModelController,
         AiProviderController,
         WebAiMcpServerController,
+        ImageGenerationController,
     ],
-    providers: [WebAiMcpServerService, UserMcpServerService],
+    providers: [WebAiMcpServerService, UserMcpServerService, ImageGenerationService],
 })
 export class AiModule {}
