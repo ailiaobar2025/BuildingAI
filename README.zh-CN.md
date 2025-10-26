@@ -62,6 +62,14 @@ http://localhost:4090
 - ⬜ **工作流** – AI 任务自动化。
 - ⬜ **插件系统** – 通过插件扩展功能。
 
+## 项目架构
+
+- 单仓管理的 TypeScript 全栈项目，使用 pnpm + Turbo 统一依赖、脚本与工作流。
+- 包含 NestJS 后端、Nuxt 3 控制台与 Uni-App 移动端三大应用，并复用 `packages/*` 下的共享能力。
+- 通过 Docker Compose 编排 PostgreSQL（pgvector）、Redis 与 Node 运行时，实现开箱即用的运行环境。
+
+[查看详细架构说明](./docs/architecture.zh-CN.md)
+
 ## 截图展示
 
 ![image](./docs/screenshots/1.png)
